@@ -1,1 +1,3 @@
-# tezos-prometheus-exporter
+# Tezos metric exporter for Prometheus
+
+
