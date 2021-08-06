@@ -19,7 +19,7 @@ var (
 )
 
 func TestCPU(t *testing.T) {
-	testExporter := createSystemExporter()
+	testExporter := createSystemExporter().(*systemExporter)
 
 	assert.NotNil(t, testExporter)
 

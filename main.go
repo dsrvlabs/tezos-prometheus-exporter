@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"dsrvlabs/tezos-prometheus-exporter/exporter"
@@ -10,21 +11,27 @@ import (
 )
 
 var (
-	tezosExporter exporter.Exporter
+	metricExporter exporter.Exporter
 )
 
 func init() {
-	tezosExporter = exporter.NewExporter()
-	tezosExporter.Collect()
+	metricExporter = exporter.NewExporter()
+	err := metricExporter.Collect()
+	if err != nil {
+		log.Panic(err)
+	}
 }
 
 func main() {
+	// TODO: Get RPC address.
+
 	e := echo.New()
 
 	e.GET("/health", health)
 	e.GET("/metrics", echo.WrapHandler(promhttp.Handler()))
 
-	if err := e.Start(":8080"); err != nil {
+	// TODO: port should be configurable.
+	if err := e.Start(":9489"); err != nil {
 		panic(err)
 	}
 }

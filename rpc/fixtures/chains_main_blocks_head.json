@@ -1,0 +1,677 @@
+{
+  "protocol": "PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV",
+  "chain_id": "NetXz969SFaFn8k",
+  "hash": "BMVZwd6CDft9DSCpRoYSC422J8f9h8HRXY5DwqQDotVbp4PgXVT",
+  "header": {
+    "level": 289076,
+    "proto": 2,
+    "predecessor": "BLuhg29MDsYv7FerMVwKXb77gRwzfikPRZXk454MniBP4fV9tTd",
+    "timestamp": "2021-08-06T09:53:56Z",
+    "validation_pass": 4,
+    "operations_hash": "LLoZxhd8gn6Y2usCRkuj6Hpb7KUgTs9cTSUUf3MRTBZZh26L4yqB3",
+    "fitness": [
+      "01",
+      "0000000000046933"
+    ],
+    "context": "CoW1NHr6AWhNLtwz4ETsjDXzkEdwcUREzaZR84ThDu6TfRzixYR3",
+    "priority": 0,
+    "proof_of_work_nonce": "568ffb08ae2c0100",
+    "liquidity_baking_escape_vote": false,
+    "signature": "sigUT1aYTvLnfTcB3dduq3KosBSTqaEu2cPrKywBWUD5rV6erJd4LZx9SMkA6Cd25j1WL5kHtH8VpmFrp1QaLWHdSza9hyT9"
+  },
+  "metadata": {
+    "protocol": "PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV",
+    "next_protocol": "PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV",
+    "test_chain_status": {
+      "status": "not_running"
+    },
+    "max_operations_ttl": 120,
+    "max_operation_data_length": 32768,
+    "max_block_header_length": 239,
+    "max_operation_list_length": [
+      {
+        "max_size": 4194304,
+        "max_op": 2048
+      },
+      {
+        "max_size": 32768
+      },
+      {
+        "max_size": 135168,
+        "max_op": 132
+      },
+      {
+        "max_size": 524288
+      }
+    ],
+    "baker": "tz1T8UYSbVuRm6CdhjvwCfXsKXb4yL9ai9Q3",
+    "level_info": {
+      "level": 289076,
+      "level_position": 289075,
+      "cycle": 71,
+      "cycle_position": 2355,
+      "expected_commitment": false
+    },
+    "voting_period_info": {
+      "voting_period": {
+        "index": 14,
+        "kind": "proposal",
+        "start_position": 286721
+      },
+      "position": 2354,
+      "remaining": 18125
+    },
+    "nonce_hash": null,
+    "consumed_gas": "0",
+    "deactivated": [],
+    "balance_updates": [
+      {
+        "kind": "contract",
+        "contract": "tz1T8UYSbVuRm6CdhjvwCfXsKXb4yL9ai9Q3",
+        "change": "-640000000",
+        "origin": "block"
+      },
+      {
+        "kind": "freezer",
+        "category": "deposits",
+        "delegate": "tz1T8UYSbVuRm6CdhjvwCfXsKXb4yL9ai9Q3",
+        "cycle": 71,
+        "change": "640000000",
+        "origin": "block"
+      },
+      {
+        "kind": "freezer",
+        "category": "rewards",
+        "delegate": "tz1T8UYSbVuRm6CdhjvwCfXsKXb4yL9ai9Q3",
+        "cycle": 71,
+        "change": "15703125",
+        "origin": "block"
+      }
+    ],
+    "liquidity_baking_escape_ema": 0,
+    "implicit_operations_results": [
+      {
+        "kind": "transaction",
+        "storage": [
+          {
+            "int": "72487770"
+          },
+          {
+            "int": "329813111902"
+          },
+          {
+            "int": "77906"
+          },
+          {
+            "bytes": "01e927f00ef734dfc85919635e9afc9166c83ef9fc00"
+          },
+          {
+            "bytes": "0115eb0104481a6d7921160bc982c5e0a561cd8a3a00"
+          }
+        ],
+        "balance_updates": [
+          {
+            "kind": "contract",
+            "contract": "KT1TxqZ8QtKvLu3V3JH7Gx58n7Co8pgtpQU5",
+            "change": "2500000",
+            "origin": "subsidy"
+          }
+        ],
+        "consumed_gas": "2118",
+        "consumed_milligas": "2117300",
+        "storage_size": "4636"
+      }
+    ]
+  },
+  "operations": [
+    [
+      {
+        "protocol": "PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV",
+        "chain_id": "NetXz969SFaFn8k",
+        "hash": "op8YCenMEZMUmpq2vu4jjRBZ1MFGYdZgakN8VPczGEGdR636EKX",
+        "branch": "BLuhg29MDsYv7FerMVwKXb77gRwzfikPRZXk454MniBP4fV9tTd",
+        "contents": [
+          {
+            "kind": "endorsement_with_slot",
+            "endorsement": {
+              "branch": "BLuhg29MDsYv7FerMVwKXb77gRwzfikPRZXk454MniBP4fV9tTd",
+              "operations": {
+                "kind": "endorsement",
+                "level": 289075
+              },
+              "signature": "sigpbMhmJLYpAgZXpNqxotkm1W7DJZKuBKVANyv42Y3RpQ5h43y2FHy7j88ukHWkxhVjbFxKUoZNsuqH2wzXSiQg2kjJmLhd"
+            },
+            "slot": 6,
+            "metadata": {
+              "balance_updates": [
+                {
+                  "kind": "contract",
+                  "contract": "tz1aWXP237BLwNHJcCD4b3DutCevhqq2T1Z9",
+                  "change": "-72500000",
+                  "origin": "block"
+                },
+                {
+                  "kind": "freezer",
+                  "category": "deposits",
+                  "delegate": "tz1aWXP237BLwNHJcCD4b3DutCevhqq2T1Z9",
+                  "cycle": 71,
+                  "change": "72500000",
+                  "origin": "block"
+                },
+                {
+                  "kind": "freezer",
+                  "category": "rewards",
+                  "delegate": "tz1aWXP237BLwNHJcCD4b3DutCevhqq2T1Z9",
+                  "cycle": 71,
+                  "change": "2265625",
+                  "origin": "block"
+                }
+              ],
+              "delegate": "tz1aWXP237BLwNHJcCD4b3DutCevhqq2T1Z9",
+              "slots": [
+                6,
+                12,
+                15,
+                16,
+                25,
+                26,
+                58,
+                64,
+                71,
+                86,
+                88,
+                91,
+                92,
+                111,
+                112,
+                119,
+                126,
+                132,
+                135,
+                157,
+                161,
+                172,
+                182,
+                203,
+                225,
+                229,
+                231,
+                244,
+                249
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "protocol": "PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV",
+        "chain_id": "NetXz969SFaFn8k",
+        "hash": "opHKWuDRstkwBExPDefb5nkoryECMzJ2wBYu8S2hM5mze9bbY8M",
+        "branch": "BLuhg29MDsYv7FerMVwKXb77gRwzfikPRZXk454MniBP4fV9tTd",
+        "contents": [
+          {
+            "kind": "endorsement_with_slot",
+            "endorsement": {
+              "branch": "BLuhg29MDsYv7FerMVwKXb77gRwzfikPRZXk454MniBP4fV9tTd",
+              "operations": {
+                "kind": "endorsement",
+                "level": 289075
+              },
+              "signature": "sigp5vUATJTnFygtnXNR6SqCYkz9Jq4AGdV76xtK4hY2Yh3Lu39S4g39WfUe9Psq3S86E8UC3TRz81nxB3hUChmWwsMCKCjS"
+            },
+            "slot": 14,
+            "metadata": {
+              "balance_updates": [
+                {
+                  "kind": "contract",
+                  "contract": "tz1SwJwrKe8H1yi6KnYKCYkVHPApJRnZcHsa",
+                  "change": "-77500000",
+                  "origin": "block"
+                },
+                {
+                  "kind": "freezer",
+                  "category": "deposits",
+                  "delegate": "tz1SwJwrKe8H1yi6KnYKCYkVHPApJRnZcHsa",
+                  "cycle": 71,
+                  "change": "77500000",
+                  "origin": "block"
+                },
+                {
+                  "kind": "freezer",
+                  "category": "rewards",
+                  "delegate": "tz1SwJwrKe8H1yi6KnYKCYkVHPApJRnZcHsa",
+                  "cycle": 71,
+                  "change": "2421875",
+                  "origin": "block"
+                }
+              ],
+              "delegate": "tz1SwJwrKe8H1yi6KnYKCYkVHPApJRnZcHsa",
+              "slots": [
+                14,
+                20,
+                21,
+                27,
+                38,
+                47,
+                48,
+                52,
+                56,
+                72,
+                76,
+                105,
+                109,
+                116,
+                121,
+                128,
+                131,
+                141,
+                145,
+                153,
+                164,
+                165,
+                167,
+                175,
+                192,
+                197,
+                228,
+                233,
+                236,
+                251,
+                252
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "protocol": "PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV",
+        "chain_id": "NetXz969SFaFn8k",
+        "hash": "ooNiRN7QqBPY3ax4Q4uRLNtZXK5ssgECcUe7tT7K1m6NNck2XXx",
+        "branch": "BLuhg29MDsYv7FerMVwKXb77gRwzfikPRZXk454MniBP4fV9tTd",
+        "contents": [
+          {
+            "kind": "endorsement_with_slot",
+            "endorsement": {
+              "branch": "BLuhg29MDsYv7FerMVwKXb77gRwzfikPRZXk454MniBP4fV9tTd",
+              "operations": {
+                "kind": "endorsement",
+                "level": 289075
+              },
+              "signature": "sigkXsxfm935By8nKtmMo6d3QFm6EJZzR2t7Y6NhYTeQ327T5bYbmLFKgXsbXDmGS41f89s7Dbu95H9pPVSPKZfcUrTHU11x"
+            },
+            "slot": 7,
+            "metadata": {
+              "balance_updates": [
+                {
+                  "kind": "contract",
+                  "contract": "tz1RomaiWJV3NFDZWTMVR2aEeHknsn3iF5Gi",
+                  "change": "-82500000",
+                  "origin": "block"
+                },
+                {
+                  "kind": "freezer",
+                  "category": "deposits",
+                  "delegate": "tz1RomaiWJV3NFDZWTMVR2aEeHknsn3iF5Gi",
+                  "cycle": 71,
+                  "change": "82500000",
+                  "origin": "block"
+                },
+                {
+                  "kind": "freezer",
+                  "category": "rewards",
+                  "delegate": "tz1RomaiWJV3NFDZWTMVR2aEeHknsn3iF5Gi",
+                  "cycle": 71,
+                  "change": "2578125",
+                  "origin": "block"
+                }
+              ],
+              "delegate": "tz1RomaiWJV3NFDZWTMVR2aEeHknsn3iF5Gi",
+              "slots": [
+                7,
+                19,
+                36,
+                39,
+                49,
+                62,
+                65,
+                81,
+                84,
+                99,
+                103,
+                124,
+                129,
+                136,
+                140,
+                147,
+                149,
+                152,
+                156,
+                163,
+                168,
+                174,
+                193,
+                194,
+                199,
+                201,
+                206,
+                211,
+                212,
+                224,
+                234,
+                240,
+                254
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "protocol": "PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV",
+        "chain_id": "NetXz969SFaFn8k",
+        "hash": "opHk2EqJCAZBmhbhXpJ6ggnAogYnDcrx8wPrNnaF1HSFX2KVK1V",
+        "branch": "BLuhg29MDsYv7FerMVwKXb77gRwzfikPRZXk454MniBP4fV9tTd",
+        "contents": [
+          {
+            "kind": "endorsement_with_slot",
+            "endorsement": {
+              "branch": "BLuhg29MDsYv7FerMVwKXb77gRwzfikPRZXk454MniBP4fV9tTd",
+              "operations": {
+                "kind": "endorsement",
+                "level": 289075
+              },
+              "signature": "sigvZGm1ePYasnCpmKng5QKJ4eLGSR7kMCPmLJdNjEQUX8MGV7tLXCmpcJoDPQpUmnUFx8hnx5QUrMaoemeqSKXeVx5zxvn4"
+            },
+            "slot": 11,
+            "metadata": {
+              "balance_updates": [
+                {
+                  "kind": "contract",
+                  "contract": "tz1cjyja1TU6fiyiFav3mFAdnDsCReJ12hPD",
+                  "change": "-87500000",
+                  "origin": "block"
+                },
+                {
+                  "kind": "freezer",
+                  "category": "deposits",
+                  "delegate": "tz1cjyja1TU6fiyiFav3mFAdnDsCReJ12hPD",
+                  "cycle": 71,
+                  "change": "87500000",
+                  "origin": "block"
+                },
+                {
+                  "kind": "freezer",
+                  "category": "rewards",
+                  "delegate": "tz1cjyja1TU6fiyiFav3mFAdnDsCReJ12hPD",
+                  "cycle": 71,
+                  "change": "2734375",
+                  "origin": "block"
+                }
+              ],
+              "delegate": "tz1cjyja1TU6fiyiFav3mFAdnDsCReJ12hPD",
+              "slots": [
+                11,
+                22,
+                23,
+                28,
+                29,
+                35,
+                41,
+                51,
+                57,
+                59,
+                60,
+                66,
+                74,
+                82,
+                93,
+                97,
+                115,
+                123,
+                125,
+                138,
+                150,
+                158,
+                183,
+                184,
+                186,
+                208,
+                221,
+                227,
+                230,
+                235,
+                237,
+                238,
+                245,
+                246,
+                248
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "protocol": "PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV",
+        "chain_id": "NetXz969SFaFn8k",
+        "hash": "onzYDjKztJsitpBbrmB93akdXA4twErV3SbdJddii3F2kcYwLxS",
+        "branch": "BLuhg29MDsYv7FerMVwKXb77gRwzfikPRZXk454MniBP4fV9tTd",
+        "contents": [
+          {
+            "kind": "endorsement_with_slot",
+            "endorsement": {
+              "branch": "BLuhg29MDsYv7FerMVwKXb77gRwzfikPRZXk454MniBP4fV9tTd",
+              "operations": {
+                "kind": "endorsement",
+                "level": 289075
+              },
+              "signature": "sigNNctpKbcd4FEVMZnX4ykgs82j5Cw1XkwqPxK6yFykyKnf3xh8YPfQvyxX7FboMeQXdZem14LGRFJccEmUncFAtnraCa1u"
+            },
+            "slot": 42,
+            "metadata": {
+              "balance_updates": [
+                {
+                  "kind": "contract",
+                  "contract": "tz1RR6wETy9BeXG3Fjk25YmkSMGHxTtKkhpX",
+                  "change": "-5000000",
+                  "origin": "block"
+                },
+                {
+                  "kind": "freezer",
+                  "category": "deposits",
+                  "delegate": "tz1RR6wETy9BeXG3Fjk25YmkSMGHxTtKkhpX",
+                  "cycle": 71,
+                  "change": "5000000",
+                  "origin": "block"
+                },
+                {
+                  "kind": "freezer",
+                  "category": "rewards",
+                  "delegate": "tz1RR6wETy9BeXG3Fjk25YmkSMGHxTtKkhpX",
+                  "cycle": 71,
+                  "change": "156250",
+                  "origin": "block"
+                }
+              ],
+              "delegate": "tz1RR6wETy9BeXG3Fjk25YmkSMGHxTtKkhpX",
+              "slots": [
+                42,
+                54
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "protocol": "PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV",
+        "chain_id": "NetXz969SFaFn8k",
+        "hash": "opRyumCTcdco2XHV2PPVnbnjZA3n2X5sAtCWF2rPWkLNWsQEZEH",
+        "branch": "BLuhg29MDsYv7FerMVwKXb77gRwzfikPRZXk454MniBP4fV9tTd",
+        "contents": [
+          {
+            "kind": "endorsement_with_slot",
+            "endorsement": {
+              "branch": "BLuhg29MDsYv7FerMVwKXb77gRwzfikPRZXk454MniBP4fV9tTd",
+              "operations": {
+                "kind": "endorsement",
+                "level": 289075
+              },
+              "signature": "sigfUAwMr9j2tS6cjvcDtRpQDghKRC6JpH8whf1W7sufy25uE1VPQ9MYtZnuSccvx6BZbahs4rT96jAhhwnC2VtVWJsizCdh"
+            },
+            "slot": 4,
+            "metadata": {
+              "balance_updates": [
+                {
+                  "kind": "contract",
+                  "contract": "tz1VWasoyFGAWZt5K2qZRzP3cWzv3z7MMhP8",
+                  "change": "-70000000",
+                  "origin": "block"
+                },
+                {
+                  "kind": "freezer",
+                  "category": "deposits",
+                  "delegate": "tz1VWasoyFGAWZt5K2qZRzP3cWzv3z7MMhP8",
+                  "cycle": 71,
+                  "change": "70000000",
+                  "origin": "block"
+                },
+                {
+                  "kind": "freezer",
+                  "category": "rewards",
+                  "delegate": "tz1VWasoyFGAWZt5K2qZRzP3cWzv3z7MMhP8",
+                  "cycle": 71,
+                  "change": "2187500",
+                  "origin": "block"
+                }
+              ],
+              "delegate": "tz1VWasoyFGAWZt5K2qZRzP3cWzv3z7MMhP8",
+              "slots": [
+                4,
+                5,
+                8,
+                10,
+                24,
+                30,
+                37,
+                40,
+                45,
+                61,
+                78,
+                80,
+                114,
+                133,
+                155,
+                171,
+                179,
+                180,
+                188,
+                190,
+                195,
+                198,
+                200,
+                213,
+                217,
+                247,
+                250,
+                253
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "protocol": "PtGRANADsDU8R9daYKAgWnQYAJ64omN1o3KMGVCykShA97vQbvV",
+        "chain_id": "NetXz969SFaFn8k",
+        "hash": "op7busXJ3NX9nfK3qNEo1Nrn4REfhVk8adoPRQ6Toq5AGZ9JgwF",
+        "branch": "BLuhg29MDsYv7FerMVwKXb77gRwzfikPRZXk454MniBP4fV9tTd",
+        "contents": [
+          {
+            "kind": "endorsement_with_slot",
+            "endorsement": {
+              "branch": "BLuhg29MDsYv7FerMVwKXb77gRwzfikPRZXk454MniBP4fV9tTd",
+              "operations": {
+                "kind": "endorsement",
+                "level": 289075
+              },
+              "signature": "sigv2Cs94v2343r6B8jUcPPgor8ac8NDfgtMtDZeB82vDTTmRXifMusmQvydfygbiDmc5egtRxL71HUgxdUqEESCmdsMA3BT"
+            },
+            "slot": 0,
+            "metadata": {
+              "balance_updates": [
+                {
+                  "kind": "contract",
+                  "contract": "tz1T8UYSbVuRm6CdhjvwCfXsKXb4yL9ai9Q3",
+                  "change": "-107500000",
+                  "origin": "block"
+                },
+                {
+                  "kind": "freezer",
+                  "category": "deposits",
+                  "delegate": "tz1T8UYSbVuRm6CdhjvwCfXsKXb4yL9ai9Q3",
+                  "cycle": 71,
+                  "change": "107500000",
+                  "origin": "block"
+                },
+                {
+                  "kind": "freezer",
+                  "category": "rewards",
+                  "delegate": "tz1T8UYSbVuRm6CdhjvwCfXsKXb4yL9ai9Q3",
+                  "cycle": 71,
+                  "change": "3359375",
+                  "origin": "block"
+                }
+              ],
+              "delegate": "tz1T8UYSbVuRm6CdhjvwCfXsKXb4yL9ai9Q3",
+              "slots": [
+                0,
+                2,
+                9,
+                13,
+                17,
+                18,
+                44,
+                53,
+                67,
+                77,
+                79,
+                85,
+                89,
+                95,
+                104,
+                106,
+                107,
+                108,
+                113,
+                130,
+                134,
+                137,
+                148,
+                151,
+                154,
+                162,
+                170,
+                173,
+                176,
+                177,
+                187,
+                191,
+                196,
+                202,
+                204,
+                207,
+                209,
+                215,
+                222,
+                223,
+                226,
+                239,
+                241
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    [],
+    [],
+    []
+  ]
+}

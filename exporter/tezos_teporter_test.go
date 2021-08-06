@@ -1,1 +1,60 @@
 package exporter
+
+import (
+	"net/http"
+	"net/http/httptest"
+	"testing"
+
+	"dsrvlabs/tezos-prometheus-exporter/mocks"
+	"dsrvlabs/tezos-prometheus-exporter/rpc"
+
+	"github.com/labstack/echo/v4"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/stretchr/testify/assert"
+)
+
+func TestTezosMetric(t *testing.T) {
+	exporter := createTezosExporter().(*tezosExporter)
+
+	// Mocks
+	mockClient := mocks.Client{}
+	exporter.rpcClient = &mockClient
+
+	mockBootstrapStatus := rpc.BootstrapStatus{
+		IsBootstrapped: true,
+		SyncState:      rpc.ChainStatusSynced,
+	}
+
+	mockBlock := rpc.Block{
+		Header: &rpc.BlockHeader{
+			Level: 100,
+		},
+	}
+	mockPeers := []rpc.Peer{
+		{ID: "peer-id-0"},
+		{ID: "peer-id-1"},
+	}
+
+	mockClient.On("GetBootstrapStatus").Return(&mockBootstrapStatus, nil)
+	mockClient.On("GetHeadBlock").Return(&mockBlock, nil)
+	mockClient.On("GetPeers").Return(mockPeers, nil)
+
+	err := exporter.getInfo()
+
+	// Test
+	e := echo.New()
+	req := httptest.NewRequest(http.MethodGet, "/metrics", nil)
+	rr := httptest.NewRecorder()
+	c := e.NewContext(req, rr)
+
+	h := echo.WrapHandler(promhttp.Handler())
+	err = h(c)
+
+	// Asserts
+	assert.Nil(t, err)
+	value, err := findMetric("block_level", rr.Body)
+	assert.Equal(t, "100", value)
+
+	value, err = findMetric("peer_count", rr.Body)
+	assert.Equal(t, "2", value)
+}

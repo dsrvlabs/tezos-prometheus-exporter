@@ -25,7 +25,7 @@ type systemExporter struct {
 }
 
 func (e *systemExporter) Collect() error {
-	log.Println("Starting exporter")
+	log.Println("Collect system metric")
 
 	go func() {
 		for {
@@ -57,10 +57,11 @@ func (e *systemExporter) Collect() error {
 }
 
 func (e *systemExporter) Stop() error {
+	// TODO:
 	return nil
 }
 
-func createSystemExporter() *systemExporter {
+func createSystemExporter() Exporter {
 	log.Println("createSystemExporter")
 
 	cpuUsage := prometheus.NewGauge(prometheus.GaugeOpts{

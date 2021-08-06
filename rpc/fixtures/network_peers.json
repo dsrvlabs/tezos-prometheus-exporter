@@ -1,0 +1,702 @@
+[
+  [
+    "idqkcJVTXNzpyHegWqwSGj7s4K4Qmt",
+    {
+      "score": 1,
+      "trusted": false,
+      "peer_metadata": {
+        "responses": {
+          "sent": {
+            "branch": "12",
+            "head": "127",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "failed": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "received": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "16318",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "41365",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "unexpected": "49154",
+          "outdated": "0"
+        },
+        "requests": {
+          "sent": {
+            "branch": "12",
+            "head": "0",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "received": {
+            "branch": "12",
+            "head": "127",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "failed": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "scheduled": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "24450",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "8866",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          }
+        },
+        "valid_blocks": "18",
+        "old_heads": "0",
+        "prevalidator_results": {
+          "cannot_download": "0",
+          "cannot_parse": "0",
+          "refused_by_prefilter": "0",
+          "refused_by_postfilter": "0",
+          "applied": "0",
+          "branch_delayed": "0",
+          "branch_refused": "0",
+          "refused": "0",
+          "duplicate": "0",
+          "outdated": "0"
+        },
+        "unactivated_chains": "0",
+        "inactive_chains": "0",
+        "future_blocks_advertised": "0",
+        "unadvertised": {
+          "block": "0",
+          "operations": "0",
+          "protocol": "0"
+        },
+        "advertisements": {
+          "sent": {
+            "head": "0",
+            "branch": "0"
+          },
+          "received": {
+            "head": "2145",
+            "branch": "12"
+          }
+        }
+      },
+      "state": "disconnected",
+      "stat": {
+        "total_sent": "0",
+        "total_recv": "0",
+        "current_inflow": 0,
+        "current_outflow": 0
+      },
+      "last_established_connection": [
+        {
+          "addr": "::ffff:52.51.3.5",
+          "port": 9732
+        },
+        "2021-07-30T08:19:42.772-00:00"
+      ],
+      "last_disconnection": [
+        {
+          "addr": "::ffff:52.51.3.5",
+          "port": 9732
+        },
+        "2021-07-30T08:19:51.120-00:00"
+      ],
+      "last_seen": [
+        {
+          "addr": "::ffff:52.51.3.5",
+          "port": 9732
+        },
+        "2021-07-30T08:19:51.120-00:00"
+      ],
+      "last_miss": [
+        {
+          "addr": "::ffff:52.51.3.5",
+          "port": 9732
+        },
+        "2021-07-30T08:19:51.120-00:00"
+      ]
+    }
+  ],
+  [
+    "idsX66KveZbkqLcgpKN8L3oBypuuSu",
+    {
+      "score": 1,
+      "trusted": false,
+      "peer_metadata": {
+        "responses": {
+          "sent": {
+            "branch": "6",
+            "head": "92",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "failed": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "received": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "20750",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "11308",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "unexpected": "25089",
+          "outdated": "0"
+        },
+        "requests": {
+          "sent": {
+            "branch": "12",
+            "head": "0",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "received": {
+            "branch": "6",
+            "head": "92",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "failed": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "scheduled": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "28144",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "3344",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          }
+        },
+        "valid_blocks": "1",
+        "old_heads": "0",
+        "prevalidator_results": {
+          "cannot_download": "0",
+          "cannot_parse": "0",
+          "refused_by_prefilter": "0",
+          "refused_by_postfilter": "0",
+          "applied": "0",
+          "branch_delayed": "0",
+          "branch_refused": "0",
+          "refused": "0",
+          "duplicate": "0",
+          "outdated": "0"
+        },
+        "unactivated_chains": "0",
+        "inactive_chains": "0",
+        "future_blocks_advertised": "0",
+        "unadvertised": {
+          "block": "0",
+          "operations": "0",
+          "protocol": "0"
+        },
+        "advertisements": {
+          "sent": {
+            "head": "0",
+            "branch": "0"
+          },
+          "received": {
+            "head": "2191",
+            "branch": "12"
+          }
+        }
+      },
+      "state": "disconnected",
+      "stat": {
+        "total_sent": "0",
+        "total_recv": "0",
+        "current_inflow": 0,
+        "current_outflow": 0
+      },
+      "last_established_connection": [
+        {
+          "addr": "2a01:e34:ec1c:8340:21e:6ff:fe48:227d",
+          "port": 9732
+        },
+        "2021-07-30T08:19:43.338-00:00"
+      ],
+      "last_disconnection": [
+        {
+          "addr": "2a01:e34:ec1c:8340:21e:6ff:fe48:227d",
+          "port": 9732
+        },
+        "2021-07-30T08:19:51.120-00:00"
+      ],
+      "last_seen": [
+        {
+          "addr": "2a01:e34:ec1c:8340:21e:6ff:fe48:227d",
+          "port": 9732
+        },
+        "2021-07-30T08:19:51.120-00:00"
+      ],
+      "last_miss": [
+        {
+          "addr": "2a01:e34:ec1c:8340:21e:6ff:fe48:227d",
+          "port": 9732
+        },
+        "2021-07-30T08:19:51.120-00:00"
+      ]
+    }
+  ],
+  [
+    "idtCyCFkvG2quNh84m67dzwonSg8qb",
+    {
+      "score": 1,
+      "trusted": false,
+      "peer_metadata": {
+        "responses": {
+          "sent": {
+            "branch": "12",
+            "head": "89",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "failed": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "received": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "20244",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "24093",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "unexpected": "46494",
+          "outdated": "0"
+        },
+        "requests": {
+          "sent": {
+            "branch": "12",
+            "head": "2",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "received": {
+            "branch": "12",
+            "head": "89",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "failed": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "scheduled": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "27701",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "6755",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          }
+        },
+        "valid_blocks": "4",
+        "old_heads": "0",
+        "prevalidator_results": {
+          "cannot_download": "0",
+          "cannot_parse": "0",
+          "refused_by_prefilter": "0",
+          "refused_by_postfilter": "0",
+          "applied": "0",
+          "branch_delayed": "0",
+          "branch_refused": "0",
+          "refused": "0",
+          "duplicate": "0",
+          "outdated": "0"
+        },
+        "unactivated_chains": "0",
+        "inactive_chains": "0",
+        "future_blocks_advertised": "0",
+        "unadvertised": {
+          "block": "0",
+          "operations": "0",
+          "protocol": "0"
+        },
+        "advertisements": {
+          "sent": {
+            "head": "0",
+            "branch": "0"
+          },
+          "received": {
+            "head": "2156",
+            "branch": "12"
+          }
+        }
+      },
+      "state": "disconnected",
+      "stat": {
+        "total_sent": "0",
+        "total_recv": "0",
+        "current_inflow": 0,
+        "current_outflow": 0
+      },
+      "last_established_connection": [
+        {
+          "addr": "::ffff:167.172.40.89",
+          "port": 9732
+        },
+        "2021-07-30T08:19:42.149-00:00"
+      ],
+      "last_disconnection": [
+        {
+          "addr": "::ffff:167.172.40.89",
+          "port": 9732
+        },
+        "2021-07-30T08:19:51.120-00:00"
+      ],
+      "last_seen": [
+        {
+          "addr": "::ffff:167.172.40.89",
+          "port": 9732
+        },
+        "2021-07-30T08:19:51.120-00:00"
+      ],
+      "last_miss": [
+        {
+          "addr": "::ffff:167.172.40.89",
+          "port": 9732
+        },
+        "2021-07-30T08:19:51.120-00:00"
+      ]
+    }
+  ],
+  [
+    "idqSFdRtFXL7Lo25QdR42gXquV4KGo",
+    {
+      "score": 1,
+      "trusted": false,
+      "conn_metadata": {
+        "disable_mempool": false,
+        "private_node": false
+      },
+      "peer_metadata": {
+        "responses": {
+          "sent": {
+            "branch": "52",
+            "head": "999",
+            "block_header": "0",
+            "operations": "701",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "16",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "failed": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "received": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "145873",
+            "operations": "123955",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "436237",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "unexpected": "74684",
+          "outdated": "0"
+        },
+        "requests": {
+          "sent": {
+            "branch": "52",
+            "head": "634",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "received": {
+            "branch": "52",
+            "head": "999",
+            "block_header": "0",
+            "operations": "701",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "4",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "failed": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "0",
+            "operations": "0",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "0",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          },
+          "scheduled": {
+            "branch": "0",
+            "head": "0",
+            "block_header": "156708",
+            "operations": "68153",
+            "protocols": "0",
+            "operation_hashes_for_block": "0",
+            "operations_for_block": "60901",
+            "checkpoint": "0",
+            "protocol_branch": "0",
+            "predecessor_header": "0",
+            "other": "0"
+          }
+        },
+        "valid_blocks": "17347",
+        "old_heads": "0",
+        "prevalidator_results": {
+          "cannot_download": "0",
+          "cannot_parse": "0",
+          "refused_by_prefilter": "0",
+          "refused_by_postfilter": "0",
+          "applied": "0",
+          "branch_delayed": "0",
+          "branch_refused": "0",
+          "refused": "0",
+          "duplicate": "0",
+          "outdated": "0"
+        },
+        "unactivated_chains": "0",
+        "inactive_chains": "0",
+        "future_blocks_advertised": "0",
+        "unadvertised": {
+          "block": "0",
+          "operations": "0",
+          "protocol": "0"
+        },
+        "advertisements": {
+          "sent": {
+            "head": "0",
+            "branch": "0"
+          },
+          "received": {
+            "head": "88266",
+            "branch": "55"
+          }
+        }
+      },
+      "state": "running",
+      "reachable_at": {
+        "addr": "::ffff:138.197.238.52",
+        "port": 9732
+      },
+      "stat": {
+        "total_sent": "4109961",
+        "total_recv": "14205236",
+        "current_inflow": 768,
+        "current_outflow": 343
+      },
+      "last_established_connection": [
+        {
+          "addr": "::ffff:138.197.238.52",
+          "port": 9732
+        },
+        "2021-08-05T06:39:24.667-00:00"
+      ],
+      "last_disconnection": [
+        {
+          "addr": "::ffff:138.197.238.52",
+          "port": 9732
+        },
+        "2021-08-05T06:39:19.129-00:00"
+      ],
+      "last_seen": [
+        {
+          "addr": "::ffff:138.197.238.52",
+          "port": 9732
+        },
+        "2021-08-05T06:39:24.667-00:00"
+      ],
+      "last_miss": [
+        {
+          "addr": "::ffff:138.197.238.52",
+          "port": 9732
+        },
+        "2021-08-05T06:39:19.129-00:00"
+      ]
+    }
+  ]
+]
