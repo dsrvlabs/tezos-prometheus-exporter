@@ -20,12 +20,19 @@ type tezosExporter struct {
 }
 
 func (e *tezosExporter) Collect() error {
-	log.Println("Collect Tezos metric")
-
 	go func() {
-		err := e.getInfo()
-		_ = err
-		time.Sleep(e.fetchInterval)
+		for {
+			log.Println("Collect Tezos metric")
+
+			err := e.getInfo()
+			if err != nil {
+				log.Println(err)
+				time.Sleep(e.fetchInterval)
+				continue
+			}
+			_ = err
+			time.Sleep(e.fetchInterval)
+		}
 	}()
 
 	return nil
