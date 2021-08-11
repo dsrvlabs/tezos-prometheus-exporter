@@ -1,6 +1,7 @@
 package exporter
 
 import (
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -31,8 +32,8 @@ func TestTezosMetric(t *testing.T) {
 		},
 	}
 	mockPeers := []rpc.Peer{
-		{ID: "peer-id-0"},
-		{ID: "peer-id-1"},
+		{ID: "peer-id-0", State: rpc.PeerStateRunning},
+		{ID: "peer-id-1", State: rpc.PeerStateAccepted},
 	}
 
 	mockClient.On("GetBootstrapStatus").Return(&mockBootstrapStatus, nil)
@@ -51,10 +52,17 @@ func TestTezosMetric(t *testing.T) {
 	err = h(c)
 
 	// Asserts
+	runningMockPeers := make([]rpc.Peer, 0)
+	for _, p := range mockPeers {
+		if p.State == rpc.PeerStateRunning {
+			runningMockPeers = append(runningMockPeers, p)
+		}
+	}
+
 	assert.Nil(t, err)
 	value, err := findMetric("block_level", rr.Body)
 	assert.Equal(t, "100", value)
 
 	value, err = findMetric("peer_count", rr.Body)
-	assert.Equal(t, "2", value)
+	assert.Equal(t, fmt.Sprintf("%d", len(runningMockPeers)), value)
 }

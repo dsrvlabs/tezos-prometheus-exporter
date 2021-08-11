@@ -31,33 +31,37 @@ func (e *tezosExporter) Collect() error {
 }
 
 func (e *tezosExporter) getInfo() error {
-	rpc := e.rpcClient
+	cli := e.rpcClient
 
-	bootstrapStatus, err := rpc.GetBootstrapStatus()
+	bootstrapStatus, err := cli.GetBootstrapStatus()
 	if err != nil {
 		log.Println(err)
 		return err
 	}
-
-	headBlock, err := rpc.GetHeadBlock()
-	if err != nil {
-		log.Println(err)
-		return err
-	}
-
-	peers, err := rpc.GetPeers()
-	if err != nil {
-		log.Println(err)
-		return err
-	}
-
-	// TODO: Filter running.
 
 	_ = bootstrapStatus
 
-	// TODO: Write bootstrap status
+	headBlock, err := cli.GetHeadBlock()
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	peers, err := cli.GetPeers()
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	runningPeers := make([]rpc.Peer, 0)
+	for _, peer := range peers {
+		if peer.State == rpc.PeerStateRunning {
+			runningPeers = append(runningPeers, peer)
+		}
+	}
+
 	e.blockLevel.Set(float64(headBlock.Header.Level))
-	e.peerCount.Set(float64(len(peers)))
+	e.peerCount.Set(float64(len(runningPeers)))
 
 	return err
 }
