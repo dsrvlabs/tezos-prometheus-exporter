@@ -15,7 +15,7 @@ import (
 )
 
 func TestTezosMetric(t *testing.T) {
-	exporter := createTezosExporter().(*tezosExporter)
+	exporter := createTezosExporter("http://localhost:8732", 1).(*tezosExporter)
 
 	// Mocks
 	mockClient := mocks.Client{}

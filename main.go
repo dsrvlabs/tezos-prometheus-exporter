@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
+	cfg "dsrvlabs/tezos-prometheus-exporter/config"
 	"dsrvlabs/tezos-prometheus-exporter/exporter"
 
 	"github.com/labstack/echo/v4"
@@ -15,7 +17,9 @@ var (
 )
 
 func init() {
-	metricExporter = exporter.NewExporter()
+	config := cfg.GetConfig()
+
+	metricExporter = exporter.NewExporter(config)
 	err := metricExporter.Collect()
 	if err != nil {
 		log.Panic(err)
@@ -23,15 +27,14 @@ func init() {
 }
 
 func main() {
-	// TODO: Get RPC address.
-
 	e := echo.New()
 
 	e.GET("/health", health)
 	e.GET("/metrics", echo.WrapHandler(promhttp.Handler()))
 
-	// TODO: port should be configurable.
-	if err := e.Start(":9489"); err != nil {
+	config := cfg.GetConfig()
+
+	if err := e.Start(fmt.Sprintf(":%d", config.ServicePort)); err != nil {
 		panic(err)
 	}
 }
