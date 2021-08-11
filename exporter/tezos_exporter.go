@@ -13,9 +13,10 @@ func init() {
 }
 
 type tezosExporter struct {
-	rpcClient  rpc.Client
-	blockLevel prometheus.Gauge
-	peerCount  prometheus.Gauge
+	rpcClient     rpc.Client
+	blockLevel    prometheus.Gauge
+	peerCount     prometheus.Gauge
+	fetchInterval time.Duration
 }
 
 func (e *tezosExporter) Collect() error {
@@ -24,7 +25,7 @@ func (e *tezosExporter) Collect() error {
 	go func() {
 		err := e.getInfo()
 		_ = err
-		time.Sleep(fetchInterval)
+		time.Sleep(e.fetchInterval)
 	}()
 
 	return nil
@@ -71,8 +72,7 @@ func (e *tezosExporter) Stop() error {
 	return nil
 }
 
-func createTezosExporter() Exporter {
-
+func createTezosExporter(rpcEndpoint string, fetchInterval int) Exporter {
 	blockLevel := prometheus.NewGauge(prometheus.GaugeOpts{
 		Name: "block_level",
 		Help: "Current block level of Tezos network",
@@ -86,10 +86,10 @@ func createTezosExporter() Exporter {
 	prometheus.MustRegister(blockLevel)
 	prometheus.MustRegister(peerCount)
 
-	// TODO: Hosts?? Fetch from config file?
 	return &tezosExporter{
-		rpcClient:  rpc.NewClient("http://localhost:8732"),
-		blockLevel: blockLevel,
-		peerCount:  peerCount,
+		rpcClient:     rpc.NewClient(rpcEndpoint),
+		blockLevel:    blockLevel,
+		peerCount:     peerCount,
+		fetchInterval: time.Duration(fetchInterval) * time.Second,
 	}
 }

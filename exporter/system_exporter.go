@@ -11,18 +11,15 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-const (
-	// TODO: From config?
-	fetchInterval = time.Second * 1
-)
-
-func init() {
-}
+const ()
 
 type systemExporter struct {
 	cpuUsage      prometheus.Gauge
 	memoryUsage   prometheus.Gauge
 	diskFreeSpace prometheus.Gauge
+
+	mountPath     string
+	fetchInterval time.Duration
 }
 
 func (e *systemExporter) Collect() error {
@@ -46,8 +43,7 @@ func (e *systemExporter) Collect() error {
 
 			e.memoryUsage.Set(used)
 
-			// TODO: Path should be configurable
-			free, _, err := e.getDiskUsage("/mnt/tezos")
+			free, _, err := e.getDiskUsage(e.mountPath)
 			if err != nil {
 				log.Println(err)
 				continue
@@ -57,7 +53,7 @@ func (e *systemExporter) Collect() error {
 
 			fmt.Printf("CPU: %+v, MEM: %+v Disk Free: %+v\n", load, used, free)
 
-			time.Sleep(fetchInterval)
+			time.Sleep(e.fetchInterval)
 		}
 	}()
 
@@ -126,7 +122,7 @@ func (e *systemExporter) Stop() error {
 	return nil
 }
 
-func createSystemExporter() Exporter {
+func createSystemExporter(mountPath string, fetchInterval int) Exporter {
 	log.Println("createSystemExporter")
 
 	cpuUsage := prometheus.NewGauge(prometheus.GaugeOpts{
@@ -152,5 +148,7 @@ func createSystemExporter() Exporter {
 		cpuUsage:      cpuUsage,
 		memoryUsage:   memoryUsage,
 		diskFreeSpace: diskFreeSpace,
+		mountPath:     mountPath,
+		fetchInterval: time.Duration(fetchInterval) * time.Second,
 	}
 }

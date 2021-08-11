@@ -13,12 +13,19 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/stretchr/testify/assert"
+
+	cfg "dsrvlabs/tezos-prometheus-exporter/config"
 )
 
 var (
 	errMetricNotFound = errors.New("Specified metric cannot be found")
-	testExporter      = createSystemExporter().(*systemExporter)
+	testExporter      *systemExporter
 )
+
+func init() {
+	config := cfg.GetConfig()
+	testExporter = createSystemExporter(config.MountPath, config.UpdateIntervalSeconds).(*systemExporter)
+}
 
 func TestCPU(t *testing.T) {
 	// Set dummy

@@ -1,6 +1,10 @@
 package exporter
 
-import "log"
+import (
+	"log"
+
+	cfg "dsrvlabs/tezos-prometheus-exporter/config"
+)
 
 // Exporter provides exporting features.
 type Exporter interface {
@@ -35,10 +39,10 @@ func (e *nodeExporter) Stop() error {
 }
 
 // NewExporter create new exporter instances.
-func NewExporter() Exporter {
+func NewExporter(config cfg.Config) Exporter {
 	// TODO: exporters should be configurable.
 	return &nodeExporter{
-		systemExporter: createSystemExporter(),
-		nodeExporter:   createTezosExporter(),
+		systemExporter: createSystemExporter(config.MountPath, config.UpdateIntervalSeconds),
+		nodeExporter:   createTezosExporter(config.RPCEndpoint, config.UpdateIntervalSeconds),
 	}
 }
