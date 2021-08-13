@@ -2,8 +2,10 @@ package exporter
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"dsrvlabs/tezos-prometheus-exporter/mocks"
@@ -17,52 +19,102 @@ import (
 func TestTezosMetric(t *testing.T) {
 	exporter := createTezosExporter("http://localhost:8732", 1).(*tezosExporter)
 
-	// Mocks
-	mockClient := mocks.Client{}
-	exporter.rpcClient = &mockClient
+	tests := []struct {
+		mockBootstrapStatus rpc.BootstrapStatus
+		mockBlock           rpc.Block
+		mockPeers           []rpc.Peer
+	}{
+		{
+			mockBootstrapStatus: rpc.BootstrapStatus{
+				IsBootstrapped: true,
+				SyncState:      rpc.ChainStatusSynced,
+			},
 
-	mockBootstrapStatus := rpc.BootstrapStatus{
-		IsBootstrapped: true,
-		SyncState:      rpc.ChainStatusSynced,
-	}
+			mockBlock: rpc.Block{
+				Header: &rpc.BlockHeader{
+					Level: 100,
+				},
+			},
+			mockPeers: []rpc.Peer{
+				{ID: "peer-id-0", State: rpc.PeerStateRunning},
+				{ID: "peer-id-1", State: rpc.PeerStateAccepted},
+				{ID: "peer-id-2", State: rpc.PeerStateRunning},
+				{ID: "peer-id-3", State: rpc.PeerStateDisconnected},
+				{ID: "peer-id-4", State: rpc.PeerStateRunning},
+			},
+		},
 
-	mockBlock := rpc.Block{
-		Header: &rpc.BlockHeader{
-			Level: 100,
+		{
+			mockBootstrapStatus: rpc.BootstrapStatus{
+				IsBootstrapped: false,
+				SyncState:      rpc.ChainStatusStuck,
+			},
+
+			mockBlock: rpc.Block{
+				Header: &rpc.BlockHeader{
+					Level: 123456,
+				},
+			},
+			mockPeers: []rpc.Peer{
+				{ID: "peer-id-10", State: rpc.PeerStateAccepted},
+				{ID: "peer-id-11", State: rpc.PeerStateAccepted},
+				{ID: "peer-id-22", State: rpc.PeerStateAccepted},
+				{ID: "peer-id-33", State: rpc.PeerStateAccepted},
+				{ID: "peer-id-44", State: rpc.PeerStateAccepted},
+			},
 		},
 	}
-	mockPeers := []rpc.Peer{
-		{ID: "peer-id-0", State: rpc.PeerStateRunning},
-		{ID: "peer-id-1", State: rpc.PeerStateAccepted},
-	}
 
-	mockClient.On("GetBootstrapStatus").Return(&mockBootstrapStatus, nil)
-	mockClient.On("GetHeadBlock").Return(&mockBlock, nil)
-	mockClient.On("GetPeers").Return(mockPeers, nil)
+	for _, test := range tests {
+		// Mocks
+		mockClient := mocks.Client{}
+		exporter.rpcClient = &mockClient
 
-	err := exporter.getInfo()
+		mockClient.On("GetBootstrapStatus").Return(&test.mockBootstrapStatus, nil)
+		mockClient.On("GetHeadBlock").Return(&test.mockBlock, nil)
+		mockClient.On("GetPeers").Return(test.mockPeers, nil)
 
-	// Test
-	e := echo.New()
-	req := httptest.NewRequest(http.MethodGet, "/metrics", nil)
-	rr := httptest.NewRecorder()
-	c := e.NewContext(req, rr)
+		err := exporter.getInfo()
 
-	h := echo.WrapHandler(promhttp.Handler())
-	err = h(c)
+		// Test
+		e := echo.New()
+		req := httptest.NewRequest(http.MethodGet, "/metrics", nil)
+		rr := httptest.NewRecorder()
+		c := e.NewContext(req, rr)
 
-	// Asserts
-	runningMockPeers := make([]rpc.Peer, 0)
-	for _, p := range mockPeers {
-		if p.State == rpc.PeerStateRunning {
-			runningMockPeers = append(runningMockPeers, p)
+		h := echo.WrapHandler(promhttp.Handler())
+		err = h(c)
+
+		// Asserts
+		runningMockPeers := make([]rpc.Peer, 0)
+		for _, p := range test.mockPeers {
+			if p.State == rpc.PeerStateRunning {
+				runningMockPeers = append(runningMockPeers, p)
+			}
 		}
+
+		rawBody, err := io.ReadAll(rr.Body)
+
+		assert.Nil(t, err)
+
+		value, err := findMetric("block_level", strings.NewReader(string(rawBody)))
+		assert.Nil(t, err)
+		assert.Equal(t, fmt.Sprintf("%d", test.mockBlock.Header.Level), value)
+
+		value, err = findMetric("peer_count", strings.NewReader(string(rawBody)))
+		assert.Nil(t, err)
+		assert.Equal(t, fmt.Sprintf("%d", len(runningMockPeers)), value)
+
+		value, err = findMetric("sync_status", strings.NewReader(string(rawBody)))
+		assert.Nil(t, err)
+
+		expectValue := bootstrapMap[test.mockBootstrapStatus.IsBootstrapped]
+		assert.Equal(t, fmt.Sprintf("%d", int(expectValue)), value)
+
+		value, err = findMetric("is_bootstrapped", strings.NewReader(string(rawBody)))
+		assert.Nil(t, err)
+
+		expectValue = syncMap[test.mockBootstrapStatus.SyncState]
+		assert.Equal(t, fmt.Sprintf("%d", int(expectValue)), value)
 	}
-
-	assert.Nil(t, err)
-	value, err := findMetric("block_level", rr.Body)
-	assert.Equal(t, "100", value)
-
-	value, err = findMetric("peer_count", rr.Body)
-	assert.Equal(t, fmt.Sprintf("%d", len(runningMockPeers)), value)
 }

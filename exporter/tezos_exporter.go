@@ -9,13 +9,25 @@ import (
 	"dsrvlabs/tezos-prometheus-exporter/rpc"
 )
 
-func init() {
-}
+var (
+	bootstrapMap = map[bool]float64{
+		false: 0,
+		true:  1,
+	}
+
+	syncMap = map[rpc.ChainStatus]float64{
+		rpc.ChainStatusStuck:    0,
+		rpc.ChainStatusSynced:   1,
+		rpc.ChainStatusUnsynced: 2,
+	}
+)
 
 type tezosExporter struct {
 	rpcClient     rpc.Client
 	blockLevel    prometheus.Gauge
 	peerCount     prometheus.Gauge
+	bootstrap     prometheus.Gauge
+	sync          prometheus.Gauge
 	fetchInterval time.Duration
 }
 
@@ -47,13 +59,16 @@ func (e *tezosExporter) getInfo() error {
 		return err
 	}
 
-	_ = bootstrapStatus
+	e.bootstrap.Set(bootstrapMap[bootstrapStatus.IsBootstrapped])
+	e.sync.Set(syncMap[bootstrapStatus.SyncState])
 
 	headBlock, err := cli.GetHeadBlock()
 	if err != nil {
 		log.Println(err)
 		return err
 	}
+
+	e.blockLevel.Set(float64(headBlock.Header.Level))
 
 	peers, err := cli.GetPeers()
 	if err != nil {
@@ -68,7 +83,6 @@ func (e *tezosExporter) getInfo() error {
 		}
 	}
 
-	e.blockLevel.Set(float64(headBlock.Header.Level))
 	e.peerCount.Set(float64(len(runningPeers)))
 
 	return err
@@ -90,13 +104,27 @@ func createTezosExporter(rpcEndpoint string, fetchInterval int) Exporter {
 		Help: "Count of connected peers on the node.",
 	})
 
+	bootstrap := prometheus.NewGauge(prometheus.GaugeOpts{
+		Name: "is_bootstrapped",
+		Help: "Bootstrap status. 0: No, 1: Yes",
+	})
+
+	sync := prometheus.NewGauge(prometheus.GaugeOpts{
+		Name: "sync_status",
+		Help: "Block sync status. 0: stuck, 1: synced, 2: unsynced",
+	})
+
 	prometheus.MustRegister(blockLevel)
 	prometheus.MustRegister(peerCount)
+	prometheus.MustRegister(bootstrap)
+	prometheus.MustRegister(sync)
 
 	return &tezosExporter{
 		rpcClient:     rpc.NewClient(rpcEndpoint),
 		blockLevel:    blockLevel,
 		peerCount:     peerCount,
+		bootstrap:     bootstrap,
+		sync:          sync,
 		fetchInterval: time.Duration(fetchInterval) * time.Second,
 	}
 }
