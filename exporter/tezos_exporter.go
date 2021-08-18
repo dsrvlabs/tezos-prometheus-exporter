@@ -95,22 +95,22 @@ func (e *tezosExporter) Stop() error {
 
 func createTezosExporter(rpcEndpoint string, fetchInterval int) Exporter {
 	blockLevel := prometheus.NewGauge(prometheus.GaugeOpts{
-		Name: "block_level",
+		Name: "tezos_block_level",
 		Help: "Current block level of Tezos network",
 	})
 
 	peerCount := prometheus.NewGauge(prometheus.GaugeOpts{
-		Name: "peer_count",
+		Name: "tezos_peer_count",
 		Help: "Count of connected peers on the node.",
 	})
 
 	bootstrap := prometheus.NewGauge(prometheus.GaugeOpts{
-		Name: "is_bootstrapped",
+		Name: "tezos_is_bootstrapped",
 		Help: "Bootstrap status. 0: No, 1: Yes",
 	})
 
 	sync := prometheus.NewGauge(prometheus.GaugeOpts{
-		Name: "sync_status",
+		Name: "tezos_sync_status",
 		Help: "Block sync status. 0: stuck, 1: synced, 2: unsynced",
 	})
 

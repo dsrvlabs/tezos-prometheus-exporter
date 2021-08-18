@@ -126,17 +126,17 @@ func createSystemExporter(mountPath string, fetchInterval int) Exporter {
 	log.Println("createSystemExporter")
 
 	cpuUsage := prometheus.NewGauge(prometheus.GaugeOpts{
-		Name: "cpu_usage",
+		Name: "system_cpu_usage",
 		Help: "System CPU Usage in percentage",
 	})
 
 	memoryUsage := prometheus.NewGauge(prometheus.GaugeOpts{
-		Name: "memory_usage",
+		Name: "system_memory_usage",
 		Help: "System Memory Usage in percentage",
 	})
 
 	diskFreeSpace := prometheus.NewGauge(prometheus.GaugeOpts{
-		Name: "disk_free",
+		Name: "system_disk_free",
 		Help: "Free disk space of selected path in megabyte",
 	})
 
