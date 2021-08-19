@@ -42,7 +42,7 @@ func (e *tezosExporter) Collect() error {
 				time.Sleep(e.fetchInterval)
 				continue
 			}
-			_ = err
+
 			time.Sleep(e.fetchInterval)
 		}
 	}()

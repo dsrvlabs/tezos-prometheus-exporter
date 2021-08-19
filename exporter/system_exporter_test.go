@@ -46,8 +46,11 @@ func TestCPU(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, http.StatusOK, rr.Code)
 
-	cpu, err := findMetric("cpu_usage", rr.Body)
-	memory, err := findMetric("memory_usage", rr.Body)
+	rawBody, err := io.ReadAll(rr.Body)
+	assert.Nil(t, err)
+
+	cpu, err := findMetric("system_cpu_usage", strings.NewReader(string(rawBody)))
+	memory, err := findMetric("system_memory_usage", strings.NewReader(string(rawBody)))
 
 	assert.Nil(t, err)
 	assert.Equal(t, "10.1234", cpu)

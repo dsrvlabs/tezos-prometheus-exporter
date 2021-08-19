@@ -36,12 +36,20 @@ func (c *client) GetHeadBlock() (*Block, error) {
 	}
 
 	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("RPC Failed with code %d", resp.StatusCode)
 	}
 
-	rawBody, _ := io.ReadAll(resp.Body)
+	rawBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
 
 	headBlock := Block{}
 	err = json.Unmarshal(rawBody, &headBlock)
@@ -67,12 +75,20 @@ func (c *client) GetPeers() ([]Peer, error) {
 	}
 
 	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("RPC Failed with code %d", resp.StatusCode)
 	}
 
-	rawBody, _ := io.ReadAll(resp.Body)
+	rawBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
 
 	data := []interface{}{}
 	err = json.Unmarshal(rawBody, &data)
@@ -108,12 +124,20 @@ func (c *client) GetBootstrapStatus() (*BootstrapStatus, error) {
 	}
 
 	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("RPC Failed with code %d", resp.StatusCode)
 	}
 
-	rawBody, _ := io.ReadAll(resp.Body)
+	rawBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
 
 	status := BootstrapStatus{}
 

@@ -18,16 +18,20 @@ type nodeExporter struct {
 }
 
 func (e *nodeExporter) Collect() error {
-	err := e.systemExporter.Collect()
-	if err != nil {
-		log.Println(err)
-		return err
+	if e.systemExporter != nil {
+		err := e.systemExporter.Collect()
+		if err != nil {
+			log.Println(err)
+			return err
+		}
 	}
 
-	err = e.nodeExporter.Collect()
-	if err != nil {
-		log.Println(err)
-		return err
+	if e.nodeExporter != nil {
+		err := e.nodeExporter.Collect()
+		if err != nil {
+			log.Println(err)
+			return err
+		}
 	}
 
 	return nil

@@ -97,21 +97,21 @@ func TestTezosMetric(t *testing.T) {
 
 		assert.Nil(t, err)
 
-		value, err := findMetric("block_level", strings.NewReader(string(rawBody)))
+		value, err := findMetric("tezos_block_level", strings.NewReader(string(rawBody)))
 		assert.Nil(t, err)
 		assert.Equal(t, fmt.Sprintf("%d", test.mockBlock.Header.Level), value)
 
-		value, err = findMetric("peer_count", strings.NewReader(string(rawBody)))
+		value, err = findMetric("tezos_peer_count", strings.NewReader(string(rawBody)))
 		assert.Nil(t, err)
 		assert.Equal(t, fmt.Sprintf("%d", len(runningMockPeers)), value)
 
-		value, err = findMetric("sync_status", strings.NewReader(string(rawBody)))
+		value, err = findMetric("tezos_sync_status", strings.NewReader(string(rawBody)))
 		assert.Nil(t, err)
 
 		expectValue := bootstrapMap[test.mockBootstrapStatus.IsBootstrapped]
 		assert.Equal(t, fmt.Sprintf("%d", int(expectValue)), value)
 
-		value, err = findMetric("is_bootstrapped", strings.NewReader(string(rawBody)))
+		value, err = findMetric("tezos_is_bootstrapped", strings.NewReader(string(rawBody)))
 		assert.Nil(t, err)
 
 		expectValue = syncMap[test.mockBootstrapStatus.SyncState]
