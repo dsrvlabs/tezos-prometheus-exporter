@@ -12,8 +12,10 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: '^1.16.7'
+      - run: go mod tidy
+      - run: make test
 
-  build_container:
+  gcloud_build:
     needs: unittest
     runs-on: ubuntu-latest
     steps:
@@ -21,13 +23,31 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: '^1.16.7'
-
+      - name: Get branch name
+        id: br
+        run: echo ::set-output name=branch::${GITHUB_REF#refs/*/}
       - uses: google-github-actions/setup-gcloud@master
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
-      - run: go mod tidy
-      - run: make test
-      - run: echo ::set-output name=branch::${GITHUB_REF#refs/*/}
-      - run: gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/tezos-prometheus-exporter:${{ branch }} .
+      - run: gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/tezos-prometheus-exporter:${{ steps.br.outputs.branch }} .
+
+  docker_build:
+    needs: unittest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login
+        uses: docker/login-action@v1
+        with:
+          username: "rootwarp"
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+      - name: Get branch name
+        id: br
+        run: echo ::set-output name=branch::${GITHUB_REF#refs/*/}
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: rootwarp/tezos-prometheus-exporter:${{ steps.br.outputs.branch }}
