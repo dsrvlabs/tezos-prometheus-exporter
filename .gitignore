@@ -16,5 +16,7 @@ tezos-prometheus-exporter
 *.swo
 *.swp
 
+coverage.out
+
 # Dependency directories (remove the comment below to include it)
 # vendor/

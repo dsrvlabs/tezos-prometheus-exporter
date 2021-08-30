@@ -1,0 +1,53 @@
+name: release
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  unittest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.16.7'
+      - run: go mod tidy
+      - run: make test
+
+  gcloud_build:
+    needs: unittest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.16.7'
+      - name: Get tag name
+        id: tag
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+      - run: gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/tezos-prometheus-exporter:${{ steps.tag.outputs.tag }} .
+
+  docker_build:
+    needs: unittest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login
+        uses: docker/login-action@v1
+        with:
+          username: "rootwarp"
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+      - name: Get tag name
+        id: tag
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: rootwarp/tezos-prometheus-exporter:${{ steps.tag.outputs.tag }}

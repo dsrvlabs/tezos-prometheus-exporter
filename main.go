@@ -1,8 +1,11 @@
 package main
 
 import (
+	"fmt"
+	"log"
 	"net/http"
 
+	cfg "dsrvlabs/tezos-prometheus-exporter/config"
 	"dsrvlabs/tezos-prometheus-exporter/exporter"
 
 	"github.com/labstack/echo/v4"
@@ -10,12 +13,17 @@ import (
 )
 
 var (
-	tezosExporter exporter.Exporter
+	metricExporter exporter.Exporter
 )
 
 func init() {
-	tezosExporter = exporter.NewExporter()
-	tezosExporter.Collect()
+	config := cfg.GetConfig()
+
+	metricExporter = exporter.NewExporter(config)
+	err := metricExporter.Collect()
+	if err != nil {
+		log.Panic(err)
+	}
 }
 
 func main() {
@@ -24,7 +32,9 @@ func main() {
 	e.GET("/health", health)
 	e.GET("/metrics", echo.WrapHandler(promhttp.Handler()))
 
-	if err := e.Start(":8080"); err != nil {
+	config := cfg.GetConfig()
+
+	if err := e.Start(fmt.Sprintf(":%d", config.ServicePort)); err != nil {
 		panic(err)
 	}
 }
