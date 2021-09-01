@@ -39,6 +39,7 @@ func (e *tezosExporter) Collect() error {
 			err := e.getInfo()
 			if err != nil {
 				log.Println(err)
+				e.clearMetrics()
 				time.Sleep(e.fetchInterval)
 				continue
 			}
@@ -86,6 +87,12 @@ func (e *tezosExporter) getInfo() error {
 	e.peerCount.Set(float64(len(runningPeers)))
 
 	return err
+}
+
+func (e *tezosExporter) clearMetrics() {
+	e.bootstrap.Set(bootstrapMap[false])
+	e.sync.Set(syncMap[rpc.ChainStatusUnsynced])
+	e.peerCount.Set(float64(0))
 }
 
 func (e *tezosExporter) Stop() error {
