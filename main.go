@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -14,13 +15,25 @@ import (
 
 var (
 	metricExporter exporter.Exporter
+	config         cfg.Config
 )
 
 func init() {
-	config := cfg.GetConfig()
+	var configFilename string
+
+	flag.StringVar(&configFilename, "config", "config.json", "-config=config.json")
+	flag.Parse()
+
+	var err error
+
+	cfgLoader := cfg.NewLoader(configFilename)
+	config, err = cfgLoader.Load()
+	if err != nil {
+		log.Panic(err)
+	}
 
 	metricExporter = exporter.NewExporter(config)
-	err := metricExporter.Collect()
+	err = metricExporter.Collect()
 	if err != nil {
 		log.Panic(err)
 	}
@@ -32,9 +45,7 @@ func main() {
 	e.GET("/health", health)
 	e.GET("/metrics", echo.WrapHandler(promhttp.Handler()))
 
-	config := cfg.GetConfig()
-
-	if err := e.Start(fmt.Sprintf(":%d", config.ServicePort)); err != nil {
+	if err := e.Start(fmt.Sprintf(":%d", config.ExporterPort)); err != nil {
 		panic(err)
 	}
 }

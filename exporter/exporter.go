@@ -6,16 +6,6 @@ import (
 	cfg "dsrvlabs/tezos-prometheus-exporter/config"
 )
 
-var (
-	// TODO: Get these values from config.
-	daemons = []string{
-		"tezos-node",
-		"tezos-baker",
-		"tezos-endorser",
-		"tezos-accuser",
-	}
-)
-
 // Exporter provides exporting features.
 type Exporter interface {
 	Collect() error
@@ -65,8 +55,8 @@ func (e *nodeExporter) Stop() error {
 func NewExporter(config cfg.Config) Exporter {
 	// TODO: exporters should be configurable.
 	return &nodeExporter{
-		systemExporter:  createSystemExporter(config.MountPath, config.UpdateIntervalSeconds),
+		systemExporter:  createSystemExporter(config.DataDir, config.UpdateIntervalSeconds),
 		nodeExporter:    createTezosExporter(config.RPCEndpoint, config.UpdateIntervalSeconds),
-		processExporter: createDaemonExporter(daemons, config.UpdateIntervalSeconds),
+		processExporter: createDaemonExporter(config.Daemons, config.UpdateIntervalSeconds),
 	}
 }

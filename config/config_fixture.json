@@ -1,0 +1,13 @@
+{
+    "rpc-addr": "http://localhost:8732",
+
+    "exporter-port": 9489,
+    "refresh-interval": 1,
+    "data-dir": "/mnt/tezos",
+    "daemons": [
+        "tezos-node",
+        "tezos-baker",
+        "tezos-endorser",
+        "tezos-accuser"
+    ]
+}

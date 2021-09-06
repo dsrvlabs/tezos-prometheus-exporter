@@ -1,10 +1,10 @@
 package config
 
 import (
-	"flag"
+	"encoding/json"
+	"io"
 	"log"
 	"os"
-	"sync"
 )
 
 const (
@@ -15,54 +15,75 @@ const (
 )
 
 var (
-	once   sync.Once
-	config Config
+	defaultDaemons = []string{"tezos-node"}
 )
-
-func init() {
-}
 
 // Config maintain service parameters
 type Config struct {
-	RPCEndpoint           string `json:"rpc_endpoint"`
-	ServicePort           int    `json:"service_port"`
-	UpdateIntervalSeconds int    `json:"update_interval_seconds"`
-	MountPath             string `json:"mount_path"`
+	RPCEndpoint           string   `json:"rpc-addr"`
+	ExporterPort          int      `json:"exporter-port"`
+	UpdateIntervalSeconds int      `json:"refresh-interval"`
+	DataDir               string   `json:"data-dir"`
+	Daemons               []string `json:"daemons"`
 }
 
-// GetConfig returns ...
-func GetConfig() Config {
+// Loader privides interfaces to load exporter config.
+type Loader interface {
+	Load() (Config, error)
+}
+
+type loader struct {
+	config   Config
+	filename string
+}
+
+func (l *loader) Load() (Config, error) {
 	log.Println("Load configs")
 
-	once.Do(func() {
-		log.Println("Check service configs")
-		config = parseConfig()
-	})
+	loadConfig, err := l.loadConfigFile(l.filename)
+	if err != nil {
+		log.Println("Can't find config file. Set default config")
 
-	return config
+		loadConfig = &Config{}
+		loadConfig.RPCEndpoint = defaultRPCEndpoint
+		loadConfig.ExporterPort = defaultServicePort
+		loadConfig.UpdateIntervalSeconds = defaultUpdateInterval
+		loadConfig.DataDir = defaultMountPath
+		loadConfig.Daemons = defaultDaemons
+	}
+
+	l.config = *loadConfig
+
+	return l.config, nil
 }
 
-func parseConfig() Config {
-	cmdLine := flag.NewFlagSet("test", flag.ContinueOnError)
+func (l *loader) loadConfigFile(filename string) (*Config, error) {
+	log.Println("Load config file", filename)
 
-	var (
-		rpcURL        string
-		servicePort   int
-		fetchInterval int
-		mountPath     string
-	)
-
-	cmdLine.StringVar(&rpcURL, "rpc-endpoint", defaultRPCEndpoint, "RPC Endpoint")
-	cmdLine.IntVar(&servicePort, "prometheus-port", defaultServicePort, "Default service port")
-	cmdLine.IntVar(&fetchInterval, "fetch-interval", defaultUpdateInterval, "Update interval(s) ")
-	cmdLine.StringVar(&mountPath, "mount-path", defaultMountPath, "Mount path to check free space")
-
-	cmdLine.Parse(os.Args[1:])
-
-	return Config{
-		RPCEndpoint:           rpcURL,
-		ServicePort:           servicePort,
-		UpdateIntervalSeconds: fetchInterval,
-		MountPath:             mountPath,
+	f, err := os.Open(filename)
+	if err != nil {
+		log.Println(err)
+		return nil, err
 	}
+
+	rawContent, err := io.ReadAll(f)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	exporterConfig := Config{}
+
+	err = json.Unmarshal(rawContent, &exporterConfig)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	return &exporterConfig, nil
+}
+
+// NewLoader creates loader to manager config.
+func NewLoader(filename string) Loader {
+	return &loader{filename: filename}
 }
