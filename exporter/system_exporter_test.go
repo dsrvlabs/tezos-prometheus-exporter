@@ -23,8 +23,11 @@ var (
 )
 
 func init() {
-	config := cfg.GetConfig()
-	testExporter = createSystemExporter(config.MountPath, config.UpdateIntervalSeconds).(*systemExporter)
+	// config := cfg.GetConfig()
+	loader := cfg.NewLoader("")
+	config, _ := loader.Load()
+
+	testExporter = createSystemExporter(config.DataDir, config.UpdateIntervalSeconds).(*systemExporter)
 }
 
 func TestCPU(t *testing.T) {

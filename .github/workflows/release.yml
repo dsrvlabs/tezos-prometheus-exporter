@@ -15,6 +15,50 @@ jobs:
       - run: go mod tidy
       - run: make test
 
+  upload:
+    needs: unittest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.16.7'
+      - run: go mod tidy
+      - run: GOOS=linux GOARCH=amd64 go build -a -v
+      - run: tar czvf tezos-prometheus-exporter.amd64.tar.gz tezos-prometheus-exporter
+      - run: sha256sum tezos-prometheus-exporter.amd64.tar.gz | awk '{ print $1 }' > tezos-prometheus-exporter.amd64.tar.gz.sha256
+
+      - name: Create release
+        uses: actions/create-release@v1
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: true
+          prerelease: true
+
+      - name: Upload ZIP
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./tezos-prometheus-exporter.amd64.tar.gz
+          asset_name: tezos-prometheus-exporter.amd64.tar.gz
+          asset_content_type: application/zip
+
+      - name: Upload Signature
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./tezos-prometheus-exporter.amd64.tar.gz.sha256
+          asset_name: tezos-prometheus-exporter.amd64.tar.gz.sha256
+          asset_content_type: application/text
+
   gcloud_build:
     needs: unittest
     runs-on: ubuntu-latest

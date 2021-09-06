@@ -1,63 +1,33 @@
 package config
 
 import (
-	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetConfig(t *testing.T) {
+func TestLoadConfigFile(t *testing.T) {
+	fixtureFile := "./config_fixture.json"
 
-	tests := []struct {
-		Desc      string
-		MockArgs  []string
-		ExpectCfg Config
-	}{
-		{
-			Desc: "Success parsing config",
-			MockArgs: []string{
-				"-rpc-endpoint", "hello",
-				"-prometheus-port", "1234",
-				"-fetch-interval", "10",
-				"-mount-path", "/mnt/tezos",
-			},
-			ExpectCfg: Config{
-				RPCEndpoint:           "hello",
-				ServicePort:           1234,
-				UpdateIntervalSeconds: 10,
-				MountPath:             "/mnt/tezos",
-			},
-		},
+	loader := NewLoader(fixtureFile)
 
-		{
-			Desc:     "Omit Value",
-			MockArgs: []string{},
-			ExpectCfg: Config{
-				RPCEndpoint:           defaultRPCEndpoint,
-				ServicePort:           defaultServicePort,
-				UpdateIntervalSeconds: defaultUpdateInterval,
-				MountPath:             defaultMountPath,
-			},
-		},
-	}
+	cfg, err := loader.Load()
 
-	for _, test := range tests {
-		args := []string{"./app"}
-		args = append(args, test.MockArgs...)
+	assert.Nil(t, err)
+	assert.Equal(t, "http://localhost:8732", cfg.RPCEndpoint)
+	assert.Equal(t, 9489, cfg.ExporterPort)
+	assert.Equal(t, 1, cfg.UpdateIntervalSeconds)
+	assert.Equal(t, "/mnt/tezos", cfg.DataDir)
+}
 
-		// Mock
-		os.Args = args
+func TestLoaderDefault(t *testing.T) {
+	loader := NewLoader("")
 
-		// Test
-		// Intentionally call parserConfig function instread of GetConfig
-		// because GetConfig function uses singleton pattern so the config instance is not updated.
-		cfg := parseConfig()
+	cfg, err := loader.Load()
 
-		// Assert
-		assert.Equal(t, test.ExpectCfg.RPCEndpoint, cfg.RPCEndpoint)
-		assert.Equal(t, test.ExpectCfg.ServicePort, cfg.ServicePort)
-		assert.Equal(t, test.ExpectCfg.UpdateIntervalSeconds, cfg.UpdateIntervalSeconds)
-		assert.Equal(t, test.ExpectCfg.MountPath, cfg.MountPath)
-	}
+	assert.Nil(t, err)
+	assert.Equal(t, defaultRPCEndpoint, cfg.RPCEndpoint)
+	assert.Equal(t, defaultServicePort, cfg.ExporterPort)
+	assert.Equal(t, defaultUpdateInterval, cfg.UpdateIntervalSeconds)
+	assert.Equal(t, defaultMountPath, cfg.DataDir)
 }
